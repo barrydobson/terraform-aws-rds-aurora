@@ -73,3 +73,13 @@ output "this_security_group_id" {
   description = "The security group ID of the cluster"
   value       = local.rds_security_group_id
 }
+
+output "this_rds_cluster_reader_instance_ids" {
+  description = "A list of all cluster read only instance ids"
+  value       = [for i in aws_rds_cluster_instance.this : i.id if ! i.writer]
+}
+
+output "this_rds_cluster_writer_instance_ids" {
+  description = "A list of all cluster writer instance ids"
+  value       = [for i in aws_rds_cluster_instance.this : i.id if i.writer]
+}
