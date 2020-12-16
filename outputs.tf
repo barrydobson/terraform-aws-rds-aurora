@@ -60,12 +60,12 @@ output "this_rds_cluster_hosted_zone_id" {
 # aws_rds_cluster_instance
 output "this_rds_cluster_instance_endpoints" {
   description = "A list of all cluster instance endpoints"
-  value       = aws_rds_cluster_instance.this.*.endpoint
+  value       = [for i in aws_rds_cluster_instance.this : i.endpoint]
 }
 
 output "this_rds_cluster_instance_ids" {
   description = "A list of all cluster instance ids"
-  value       = aws_rds_cluster_instance.this.*.id
+  value       = [for i in aws_rds_cluster_instance.this : i.id]
 }
 
 # aws_security_group
